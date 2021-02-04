@@ -3,7 +3,5 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/http.txt" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/webserver/core/WebServer.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/../WebServer_v3/http.txt" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/../WebServer_v3/src/main/java/com/webserver/core/WebServer.java" charset="GBK" />
   </component>
 </project>
