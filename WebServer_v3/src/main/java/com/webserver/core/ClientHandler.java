@@ -1,16 +1,18 @@
 package com.webserver.core;
 
+import com.webserver.http.HttpRequest;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
 /**
- * å®¢æˆ·ç«¯å¤„ç†å™¨ï¼Œè¯¥ç±»è´Ÿè´£ä¸æŒ‡å®šçš„å®¢æˆ·ç«¯äº¤äº’
- * å¯¹äºHTTPåè®®è€Œè¨€ï¼Œå®¢æˆ·ç«¯ä¸æœåŠ¡ç«¯çš„äº¤äº’ç”±ä¸‰éƒ¨åˆ†ç»„æˆ
- * 1ï¼šè§£æè¯·æ±‚
- * 2ï¼šå¤„ç†è¯·æ±‚
- * 3ï¼šå“åº”å®¢æˆ·ç«¯
+ * ¿Í»§¶Ë´¦ÀíÆ÷£¬¸ÃÀà¸ºÔğÓëÖ¸¶¨µÄ¿Í»§¶Ë½»»¥
+ * ¶ÔÓÚHTTPĞ­Òé¶øÑÔ£¬¿Í»§¶ËÓë·şÎñ¶ËµÄ½»»¥ÓÉÈı²¿·Ö×é³É
+ * 1£º½âÎöÇëÇó
+ * 2£º´¦ÀíÇëÇó
+ * 3£ºÏìÓ¦¿Í»§¶Ë
  * @author wm
  */
 public class ClientHandler implements Runnable{
@@ -22,25 +24,18 @@ public class ClientHandler implements Runnable{
 
     public void run(){
         try{
-            InputStream in=socket.getInputStream();
+           System.out.println("ClientHandler:¿ªÊ¼´¦Àí");
+            //1½âÎöÇëÇó
+            System.out.println("ClientHandler£º¿ªÊ¼½âÎöÇëÇó");
+            HttpRequest request=new HttpRequest(socket);
+            System.out.println("ClientHandler:½âÎöÇëÇóÍê±Ï£¡");
 
-            int d= -1;
-            char c1='a';
-            char c2='a';
-            StringBuilder builder=new StringBuilder();
-            while ((d=in.read())!=-1){
-                c2=(char) d;
-                //å¦‚æœä¸Šæ¬¡è¯»å–äº†CRï¼Œæœ¬æ¬¡è¯»å–äº†LF
-                if(c1==13&&c2==10){
-                    //åœæ­¢è¯»å–å·¥ä½œ
-                    break;
-                }
-                c1=c2; //æœ¬æ¬¡è¯»å–çš„å­—ç¬¦è®°å½•ä¸ºä¸Šæ¬¡è¯»å–
-                builder.append(c2);
-            }
+            //2´¦ÀíÇëÇó
 
-            String line=builder.toString().trim();
-            System.out.print(line);
+
+            //3ÏìÓ¦¿Í»§¶Ë
+
+            System.out.println("ClientHandler:´¦ÀíÍê³É");
 
 
         }catch (Exception e)

@@ -1,32 +1,177 @@
 package com.webserver.http;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.Socket;
 
 /**
- * è¯·æ±‚å¯¹è±¡
- * è¯¥ç±»çš„æ¯ä¸€ä¸ªå®ä¾‹ç”¨äºè¡¨ç¤ºå®¢æˆ·ç«¯å‘é€è¿‡æ¥çš„ä¸€ä¸ªè¯·æ±‚å†…å®¹
- * æ¯ä¸ªè¯·æ±‚å†…å®¹ç”±ä¸‰éƒ¨åˆ†æ„æˆï¼š
- * 1ï¼šè¯·æ±‚è¡Œ
- * 2ï¼šæ¶ˆæ¯å¤´
- * 3ï¼šæ¶ˆæ¯æ­£æ–‡
+ * ÇëÇó¶ÔÏó
+ * ¸ÃÀàµÄÃ¿Ò»¸öÊµÀıÓÃÓÚ±íÊ¾¿Í»§¶Ë·¢ËÍ¹ıÀ´µÄÒ»¸öÇëÇóÄÚÈİ
+ * Ã¿¸öÇëÇóÄÚÈİÓÉÈı²¿·Ö¹¹³É£º
+ * 1£ºÇëÇóĞĞ
+ * 2£ºÏûÏ¢Í·
+ * 3£ºÏûÏ¢ÕıÎÄ
  */
 public class HttpRequest {
-    //è¯·æ±‚è¡Œç›¸å…³ä¿¡æ¯
+    //ºÍÁ¬½ÓÏà¹ØµÄÊôĞÔ
+    private Socket socket;
+    private InputStream in;
 
-    //æ¶ˆæ¯å¤´ç›¸å…³ä¿¡æ¯
 
-    //æ¶ˆæ¯æ­£æ–‡ç›¸å…³ä¿¡æ¯
+    //ÇëÇóĞĞÏà¹ØĞÅÏ¢
+    //ÇëÇó·½Ê½
+    private  String  method;
+    //ÇëÇó×ÊÔ´µÄ³éÏóÂ·¾¶
+    private  String  uri;
+    //ÇëÇóĞ­Òé
+    private  String  protocol;
+
+    //ÏûÏ¢Í·Ïà¹ØĞÅÏ¢
+
+
+
+    //ÏûÏ¢ÕıÎÄÏà¹ØĞÅÏ¢
 
 
     /**
-     * HttpRequestçš„æ„é€ æ–¹æ³•ï¼Œå®ä¾‹åŒ–çš„è¿‡ç¨‹å°±æ˜¯è¯»å–
-     * å®¢æˆ·ç«¯å‘é€è¿‡æ¥çš„è¯·æ±‚ç—…è§£æçš„è¿‡ç¨‹ã€‚å®ä¾‹åŒ–åçš„å½“å‰
-     * å¯¹è±¡å³è¡¨ç¤ºæ­¤æ¬¡å‘é€è¿‡æ¥çš„è¯·æ±‚å†…å®¹ã€‚
-     * @param in
+     * HttpRequestµÄ¹¹Ôì·½·¨£¬ÊµÀı»¯µÄ¹ı³Ì¾ÍÊÇ¶ÁÈ¡
+     * ¿Í»§¶Ë·¢ËÍ¹ıÀ´µÄÇëÇó²¡½âÎöµÄ¹ı³Ì¡£ÊµÀı»¯ºóµÄµ±Ç°
+     * ¶ÔÏó¼´±íÊ¾´Ë´Î·¢ËÍ¹ıÀ´µÄÇëÇóÄÚÈİ¡£
+     * @param socket
      */
-    public HttpRequest(InputStream in){
+    public HttpRequest(Socket socket) {
+
+        try{
+            /**
+             * Í¨¹ıSocket»ñÈ¡ÊäÈëÁ÷£¬ÒÔ±ãÏÂÃæÈı¸ö·½·¨½âÎö¿Í»§¶Ë·¢ËÍµÄ
+             * ÇëÇóÊ±Ê¹ÓÃ
+             * Í¬Ê±±£´æsocket£¬ÒÔ±¸ËûÓÃ¡£
+             */
+            this.socket=socket;
+            in=this.socket.getInputStream();
+
+            /**
+             * ½âÎöÇëÇó·ÖÎªÈı²½£º
+             * 1.½âÎöÇëÇóĞĞ
+             * 2.½âÎöÏûÏ¢Í·
+             * 3.½âÎöÏûÏ¢ÕıÎÄ
+             */
+            parseRequestLine();
+            parseHeaders();
+            parseContent();
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+    }
+
+    /**
+     * ½âÎöÇëÇóĞĞ
+     */
+    private void parseRequestLine(){
+        System.out.println("HttpRequest:¿ªÊ¼½âÎöÇëÇóĞĞ...");
+        try {
+
+            //¶ÁÈ¡¿Í»§¶Ë·¢ËÍ¹ıÀ´µÄµÚÒ»ĞĞ×Ö·û´®
+            //ÒòÎªÒ»¸öÇëÇóµÄµÚÒ»ĞĞ¾ÍÊÇÇëÇóĞĞÄÚÈİ
+            String line=readLine();
+            System.out.println("ÇëÇóĞĞµÄÄÚÈİ£º"+line);
+
+            /**
+             * ½«ÇëÇóĞĞµÄÄÚÈİ°´ÕÕ¿Õ¸ñ²ğ·ÖÎªÈıÏî
+             * ²¢·Ö±ğ¸³Öµ¸ømethod£¬uri£¬protocolÈı¸öÊôĞÔ¡£
+             *  split ºÍsubstring¶¼¿ÉÒÔ
+             */
+
+
+            /**
+             *
+            int num= line.indexOf(' ');
+            method=line.substring(0,num);
+            int num1=line.lastIndexOf(' ');
+            uri=line.substring(num+1,num1);
+            protocol= line.substring(num1+1,line.length());
+            System.out.println("method:" +method);
+            System.out.println("uri:"+uri);
+            System.out.println("protocol:"+protocol);
+             */
+
+            String regex=" ";
+
+            String[] s=line.split(regex);
+
+            method=s[0];
+            uri=s[1];
+            protocol=s[2];
+            System.out.println("method:" +method);
+            System.out.println("uri:"+uri);
+            System.out.println("protocol:"+protocol);
 
 
 
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        System.out.println("HttpRequest:½âÎöÇëÇóĞĞÍê±Ï");
+    }
+
+    /**
+     * ½âÎöÏûÏ¢Í·
+     */
+    private void parseHeaders(){
+        System.out.println("HttpRequest:¿ªÊ¼½âÎöÏûÏ¢Í·...");
+        try{
+
+            while(true) {
+                String line=readLine();
+                //¶ÁÈ¡µ½ÏûÏ¢Í·µÄÄ©Î²£¬µ¥¶ÀÒ»¸ö¿ÕĞĞ
+                if("".equals(line)){
+//                if(line.length()==0){
+                    break;
+                }
+                System.out.println( line);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        System.out.println("HttpRequest:½âÎöÏûÏ¢Í·Íê±Ï");
+    }
+
+    /**
+     * ½âÎöÏûÏ¢ÕıÎÄ
+     *
+     */
+    private void parseContent(){
+        System.out.println("HttpRequest:¿ªÊ¼½âÎöÏûÏ¢ÕıÎÄ...");
+
+        System.out.println("HttpRequest:½âÎöÏûÏ¢ÕıÎÄÍê±Ï");
+    }
+
+    /**
+     * Í¨¹ıÊäÈëÁ÷in¶ÁÈ¡¿Í»§¶Ë·¢ËÍ¹ıÀ´µÄÒ»ĞĞ×Ö·û´®£¨ÒÔCRLF½áÎ²£©£¬
+     * µ«ÊÇ²»º¬ÓĞCRLF¡£
+     * ´Ë·½·¨ÔÚ½âÎöÇëÇóĞĞºÍÏûÏ¢Í·Ê±Ê¹ÓÃ
+     * @return
+     */
+    private String readLine() throws IOException {
+        int d= -1;
+        char c1='a';
+        char c2='a';
+        StringBuilder builder=new StringBuilder();
+        while ((d=in.read())!=-1){
+            c2=(char) d;
+            //Èç¹ûÉÏ´Î¶ÁÈ¡ÁËCR£¬±¾´Î¶ÁÈ¡ÁËLF
+            if(c1==13&&c2==10){
+                //Í£Ö¹¶ÁÈ¡¹¤×÷
+                break;
+            }
+            c1=c2; //±¾´Î¶ÁÈ¡µÄ×Ö·û¼ÇÂ¼ÎªÉÏ´Î¶ÁÈ¡
+            builder.append(c2);
+        }
+        String line=builder.toString().trim();
+        return line;
     }
 }
