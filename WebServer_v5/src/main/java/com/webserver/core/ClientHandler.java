@@ -2,10 +2,7 @@ package com.webserver.core;
 
 import com.webserver.http.HttpRequest;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.Socket;
 
 /**
@@ -40,6 +37,27 @@ public class ClientHandler implements Runnable{
             File file= new File("./webapps"+Path);
             if(file.exists()){
                 System.out.println("文件已找到！");
+                /**
+                 * 将用户请求的该资源以标准的HTTP响应格式发送回给客户端
+                 * 1：发送状态行
+                 * 2：发送响应头
+                 * 3：发送响应正文
+                 *
+                 */
+                //通过socket获取输出流，用于给客户端发送消息
+                OutputStream out= socket.getOutputStream();
+
+                //1.发送状态行
+                String line="HTTP/1.1 200 ok";
+                out.write(line.getBytes("ISO8859-1"));
+                out.write(13);//wirtten CR
+                out.write(10);//wirtten LF
+
+                //2.发送响应头
+
+                //3.发送响应正文
+
+
             }else {
                 System.out.println("文件不存在！");
             }

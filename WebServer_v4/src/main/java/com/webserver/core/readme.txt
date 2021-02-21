@@ -15,3 +15,16 @@
 2： 在webapps下新建第一个网络应用myweb（新建一个名为myweb的子目录）
 
 3：在myweb目录下新建第一个页面：index.html
+
+4：ClientHandler完成第二步处理
+   首先用户在浏览器的地址栏中输入路径，如：
+   http://localhost:8088/myweb/index.html
+
+   此时ClientHandler 第二步处理请求时通过request获取请求行中uri
+   的值时应当得到的就是：
+   /myweb/index.html
+
+   然后实例化一个File，并且从webapps目录下再根据请求路径
+   /myweb/index.html就应当可以找到我们创建的文件：
+   ./webapps/myweb/index.html了。
+   然后添加分支，判断文件是否存在并分别打桩。
