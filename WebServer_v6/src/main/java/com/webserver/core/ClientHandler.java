@@ -23,7 +23,7 @@ public class ClientHandler implements Runnable{
 
     public void run(){
         try{
-           System.out.println("ClientHandler:开始处理");
+            System.out.println("ClientHandler:开始处理");
             //1解析请求
             System.out.println("ClientHandler：开始解析请求");
             HttpRequest request=new HttpRequest(socket);
@@ -86,74 +86,76 @@ public class ClientHandler implements Runnable{
 
             }else {
                 System.out.println("文件不存在！");
-//                //获取404.html
-//                File file1=new File("./webapps/root/404.html");
-//                if(!file1.exists()){
-//                    System.out.println("404.html not found");
-//                    return;
-//                }
-//                //获取socket输出流，发送信息
-//                OutputStream out =  socket.getOutputStream();
-//
-//                //1.发送状态行
-//                String line="HTTP/1.1 404 Not Found";
-//                out.write(line.getBytes("ISO8859-1"));
-//                out.write(13);
-//                out.write(10);
-//
-//                //2.发送响应头
-//                // Content-Type  与Content-Length
-//                line="Content-Type: text/html";
-//                out.write(line.getBytes("ISO8859-1"));
-//                out.write(13);
-//                out.write(10);
-//
-//                line="Content-Length: "+file1.length();
-//                out.write(line.getBytes("ISO8859-1"));
-//                out.write(13);
-//                out.write(10);
-//
-//                //结束消息头
-//                out.write(13);
-//                out.write(10);
-//
-//                //3. 发送消息体
-//                System.out.println("发送消息体");
-//                FileInputStream fis1=new FileInputStream(file1);
-//                int len1=-1;
-//                byte[] data=new byte[1024*10];
-//                while ((len1=fis1.read())!= -1 ){
-//                    out.write(data,0,len1);
-//                }
-                File notFoundPage
-                        = new File("./webapps/root/404.html");
-
-                OutputStream out = socket.getOutputStream();
-                String line = "HTTP/1.1 404 Not Found";
-                out.write(line.getBytes("ISO8859-1"));
-                out.write(13);
-                out.write(10);
-
-                line = "Content-Type: text/html";
-                out.write(line.getBytes("ISO8859-1"));
-                out.write(13);
-                out.write(10);
-
-                line = "Content-Length: "+notFoundPage.length();
-                out.write(line.getBytes("ISO8859-1"));
-                out.write(13);
-                out.write(10);
-
-                out.write(13);
-                out.write(10);
-
-                FileInputStream fis
-                        = new FileInputStream(notFoundPage);
-                int len = -1;
-                byte[] data = new byte[1024*10];
-                while((len = fis.read(data))!=-1) {
-                    out.write(data,0,len);
+                //获取404.html
+                File file1=new File("./webapps/root/404.html");
+                if(!file1.exists()){
+                    System.out.println("404.html not found");
+                    return;
                 }
+                //获取socket输出流，发送信息
+                OutputStream out =  socket.getOutputStream();
+
+                //1.发送状态行
+                String line="HTTP/1.1 404 Not Found";
+                out.write(line.getBytes("ISO8859-1"));
+                out.write(13);
+                out.write(10);
+
+                //2.发送响应头
+                // Content-Type  与Content-Length
+                line="Content-Type: text/html";
+                out.write(line.getBytes("ISO8859-1"));
+                out.write(13);
+                out.write(10);
+
+                line="Content-Length: "+file1.length();
+                out.write(line.getBytes("ISO8859-1"));
+                out.write(13);
+                out.write(10);
+
+                //结束消息头
+                out.write(13);
+                out.write(10);
+
+                //3. 发送消息体
+                System.out.println("发送消息体");
+                FileInputStream fis1=new FileInputStream(file1);
+                int len1=-1;
+                byte[] data=new byte[1024*10];
+                while ((len1=fis1.read(data))!= -1 ){
+                    out.write(data,0,len1);
+                }
+                /**
+                 File notFoundPage
+                 = new File("./webapps/root/404.html");
+
+                 OutputStream out = socket.getOutputStream();
+                 String line = "HTTP/1.1 404 Not Found";
+                 out.write(line.getBytes("ISO8859-1"));
+                 out.write(13);
+                 out.write(10);
+
+                 line = "Content-Type: text/html";
+                 out.write(line.getBytes("ISO8859-1"));
+                 out.write(13);
+                 out.write(10);
+
+                 line = "Content-Length: "+notFoundPage.length();
+                 out.write(line.getBytes("ISO8859-1"));
+                 out.write(13);
+                 out.write(10);
+
+                 out.write(13);
+                 out.write(10);
+
+                 FileInputStream fis
+                 = new FileInputStream(notFoundPage);
+                 int len = -1;
+                 byte[] data = new byte[1024*10];
+                 while((len = fis.read(data))!=-1) {
+                 out.write(data,0,len);
+                 }
+                 */
 
 
             }
