@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="WebServer_v2" />
+        <module name="WebServer_v1" />
+        <module name="WebServer_v11" />
+        <module name="WebServer_v10" />
+        <module name="WebServer" />
+        <module name="WebServer_v9" />
+        <module name="WebServer_v8" />
+        <module name="WebServer_v7" />
+        <module name="WebServer_v6" />
+        <module name="WebServer_v5" />
+        <module name="WebServer_v4" />
+        <module name="WebServer_v3" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>
