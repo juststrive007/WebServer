@@ -4,6 +4,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * 响应对象
@@ -29,6 +33,8 @@ public class HttpResponse {
 
 
     //响应头相关信息
+    //存放所有要发送的响应头，key为响应头名字，value为对应的值。
+    private Map<String,String> headers = new HashMap<>();
 
     //响应正文相关信息
 
@@ -92,23 +98,17 @@ public class HttpResponse {
     private  void sendHeaders(){
         System.out.println("HttpResponse:开始发送响应头");
         try{
-            /**
-             *响应中常见的两个响应头：
-             * Content-Type，用于告知浏览器响应正文中内容是什么数据
-             * （比如：页面，图片等），如果在响应头中不指定，则是让浏览器自行
-             * 判断，那么浏览器会结合之前的请求地址来判断
-             *
-             * Content-Length,用于告知浏览器响应正文的实际长度，单位是
-             * 字节。浏览器则在读取响应正文实际读取该字节量来接收正文内容。
-             */
-            String line="Content-Type: text/html";
-            out.write(line.getBytes("ISO8859-1"));
-            out.write(13);
-            out.write(10);
-
-            line="Content-Length: "+entity.length();
-            out.write(13);
-            out.write(10);
+            //遍历所有header，将所有header发送
+            Set<Map.Entry<String,String>> set=headers.entrySet();
+           for(Map.Entry<String,String> e :set){
+               String key=e.getKey();
+               String value=e.getValue();
+               String line=key+": "+value;
+               System.out.println(line);
+               out.write(line.getBytes("ISO8859-1"));
+               out.write(13);
+               out.write(10);
+           }
             //单独发送CRLF，表示响应头发送完毕
             out.write(13);
             out.write(10);
@@ -151,4 +151,15 @@ public class HttpResponse {
     public void setStatusReason(String statusReason) {
         this.statusReason = statusReason;
     }
+
+    /**
+     * 添加要发送的响应头
+     * @param name
+     * @param value
+     */
+    public void putHeader(String name ,String value){
+        headers.put(name,value);
+    }
+
+
 }

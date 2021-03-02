@@ -41,6 +41,10 @@ public class ClientHandler implements Runnable{
             if(file.exists()){
                 System.out.println("文件已找到！");
                 response.setEntity(file);
+                //设置响应头
+                response.putHeader("Content-Type","text/html");
+                response.putHeader("Content-Length",file.length()+"");//或者使用string.valueof
+                response.putHeader("Server","nginx");
                 /**
                  * 将用户请求的该资源以标准的HTTP响应格式发送回给客户端
                  * 1：发送状态行
@@ -55,6 +59,7 @@ public class ClientHandler implements Runnable{
                 System.out.println("文件不存在！");
                 //获取404.html
                 File notFound=new File("./webapps/root/404.html");
+
                 if(!notFound.exists()){
                     System.out.println("404.html not found");
                     return;
@@ -63,6 +68,10 @@ public class ClientHandler implements Runnable{
                 response.setEntity(notFound);
                 response.setStatusCode(404);
                 response.setStatusReason("NOT Found");
+
+                //发送响应头
+                response.putHeader("Content-Type","text/html");
+                response.putHeader("Content-Length",notFound.length()+"");
 
                 //1.发送状态行
                 //2.发送响应头
