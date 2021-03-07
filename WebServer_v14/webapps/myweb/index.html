@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <!--凡是在浏览器中看到当前页面中的中文内容是乱码的
+         都是因为下面这里指定字符集时有拼写错误导致的-->
+        <meta charset="UTF-8">
+        <title>我的首页</title>
+    </head>
+    <body>
+        <center>
+            <!--
+                html代码中我们通常会指定某个需要在页面上使用的
+                资源路径，使得浏览器在解析当前页面时根据该路径访问
+                并下载这个资源来使用。
+                浏览器在解析路径时，“./"当前目录指的是当前页面所在
+                的目录。
+                比如，我们访问当前页面在地址栏中输入的为
+                http://localhost:8088/meyweb/index.html
+                此时浏览器认为"./"的路径为：
+                http://localhost:8088/myweb
+                因此，下面图片的路径"./logo.png"实际路径为
+                http://localhost:8088/myweb/logo.png
+            -->
+            <img src="./logo.png"><br>
+            <input type="text" size="32">
+            <input type="button" value="百度一下"
+                   onclick="alert('点一下有点痛！')"><br>
+
+            <a href="./reg.html">
+                注册
+            </a>
+        </center>
+
+    </body>
+</html>
