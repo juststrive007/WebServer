@@ -1,5 +1,6 @@
 package com.webserver.http;
 
+import javax.xml.parsers.SAXParser;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,12 +34,14 @@ public class HTTPContext {
      * 初始化mimeMapping
      */
     private static void initMimeMapping(){
-        mimeMapping.put("html","text/html");
-        mimeMapping.put("css","text/css");
-        mimeMapping.put("js","application/javascript");
-        mimeMapping.put("png","image/png");
-        mimeMapping.put("gif","image/gif");
-        mimeMapping.put("jpg","image/jpeg");
+//        mimeMapping.put("html","text/html");
+//        mimeMapping.put("css","text/css");
+//        mimeMapping.put("js","application/javascript");
+//        mimeMapping.put("png","image/png");
+//        mimeMapping.put("gif","image/gif");
+//        mimeMapping.put("jpg","image/jpeg");
+
+
 
     }
 
