@@ -3,6 +3,7 @@ package com.webserver.core;
 import com.webserver.http.EmptyRequestException;
 import com.webserver.http.HttpRequest;
 import com.webserver.http.HttpResponse;
+import com.webserver.servlet.LoginServlet;
 import com.webserver.servlet.RegServlet;
 import sun.nio.cs.ISO_8859_2;
 
@@ -46,7 +47,12 @@ public class ClientHandler implements Runnable{
                 System.out.println("请求注册业务！！！！！");
                 RegServlet servlet=new RegServlet();
                 servlet.service(request,response);
-            } else{
+            } else if("/myweb/login".equals(Path)){
+                System.out.println("请求登录业务");
+                LoginServlet servlet=new LoginServlet();
+                servlet.service(request,response);
+            }
+            else{
 
 
                 //2.3根据用户请求的资源路径去webapps目录下寻找webapp的文件

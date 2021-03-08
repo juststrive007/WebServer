@@ -1,0 +1,52 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>用户登录</title>
+</head>
+<body>
+<center>
+    <h1>用户登录</h1><br>
+    <!--
+        form表单
+        表单是用来将用户在页面输入的信息
+        提交到服务端使用的，所有需要提交的信息所对应得输入域
+        都应当包含在form中，不包含的则会被忽略。
+
+        form有两个重要的属性：
+        method：提交方式，默认为GET
+        action：表单提交的路径
+
+        method常用值：
+        GET:地址栏形式提交，所有表单中的内容会被拼接到url中提交
+        POST：打包提交，所有内容包含在请求的消息正文中，如果提交的
+        数据包含敏感信息或者附件则要使用这种方式。
+
+
+        
+
+    -->
+    <!--
+        action="./reg"
+        实例请求
+        http://localtion:8088/myweb/reg
+    -->
+    <form method="get" action="./login">
+        <table border="1">
+            <tr>
+                <td>用户名</td>
+                <td><input name="username" type="text"></td>
+            </tr>
+            <tr>
+                <td>密码</td>
+                <td><input name="password" type="password"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="登录">
+                </td>
+            </tr>
+        </table>
+    </form>
+</center>
+</body>
+</html>
