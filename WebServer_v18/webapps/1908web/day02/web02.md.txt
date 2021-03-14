@@ -1,0 +1,169 @@
+###课程回顾
+1. 内容标题:  h1-h6                 align="left/right/center"
+	字体加粗  独占一行  自带上下间距
+2. 段落标签:  p
+	独占一行 自带上下间距
+3. 换行br
+4. 列表标签
+- 无序列表:   ul:type   li
+- 有序列表:   ol:type  start  reversed      li
+- 定义列表:   dl    dt    dd 
+- 列表嵌套:  有序列表和无序列表可以任意无限嵌套  
+5. 图片标签 img
+- src: 路径:  
+	1. 相对路径:访问站内资源时使用
+	- 图片和页面同目录:  直接写文件名
+	- 图片在页面的上级目录: ../文件名
+	- 图片在页面的下级目录: 文件夹名/文件名
+	2. 绝对路径:访问站外资源时使用, 图片盗链 ,节省本站资源 但是有找不到图片的风险
+- alt: 当图片不能正常显示时显示的文本
+- title: 当鼠标悬停时显示的文本
+- width/height:  1. 像素     2. 百分比
+6. 表格标签 table   border边框粗细   cellspacing(两条线变一条线)
+- tr 表示行   
+- td 表示列     属性:colspan跨列    rowspan跨行 
+- th  表头   字体加粗并且居中
+- caption  表格的标题 
+7. form表单
+- action: 提交路径  
+- 各种控件:
+	1. 文本框  <input type="text" name   value值  placeholder占位文本 readonly只读>
+	2. 密码框 <input type="password" 属性和文本框通用>
+	3. 单选  <input type="radio" name value checked默认选中>
+	4. 多选  <input type="checkbox" 属性和单选通用> 
+	5. 日期  <input type="date" name>
+	6. 文件选择  <input type="file" name>
+	7. 下拉选  <select name> <option value selected>
+	8. 重置按钮  <input type="reset" value>
+	9. 提交按钮  <input type="submit" value显示文本>
+
+###修改eclipse默认的缩进方式
+- window->preference->web->Html file->Editor->勾选 Indent using spaces 把下面的1改成2
+###实体引用(特殊字符)
+- 空格:  在html页面中 空格存在 空格折叠现象  通过&nbsp;
+- 小于号: &lt;
+- 大于号: &gt;
+###分区标签div
+- 分区标签自身没有显示效果,可以理解成是一个容器,对多个有相关性的标签进行统一管理
+- 一个页面一般分为三大区: 
+	<div>头</div>
+	<div>体</div>
+	<div>脚</div>
+- html5中新增了几个分区标签  作用和div一样,只是提高了代码可读性
+	<header>头</header>
+	<nav>导航</nav>
+	<article>文章/正文</article> <section>块/区域</section>
+	<footer>脚</footer>
+###CSS
+- Casecading层叠 Style样式Sheet表: 层叠样式表
+- 作用: 用于美化页面  (装修)
+###CSS的引入方式:
+- 学习如何把css写入到html页面中:
+- 三种引入方式:
+1. 内联样式: 在标签的style属性中添加样式代码,弊端:不能复用
+	<h1 style="color:red">今天贼冷</h1>
+2. 内部样式: 在head标签里面添加style标签,在标签体内添加样式代码, 好处可以复用, 弊端: 只能在当前页面复用
+
+3. 外部样式: 在单独的css文件中写样式代码,在html页面中通过link标签引入该样式文件, 好处:支持多页面复用.  
+- 外部样式工作中使用频率最高, 但是学习过程中内部样式用的多
+- 引入方式的优先级: 内联优先级最高,内部和外部优先级相同 后执行覆盖先执行的.
+
+###选择器
+- 当使用内部或外部样式时,需要先通过选择器选择到元素后再添加样式.
+1. 标签名选择器
+- 格式:  标签名{样式代码}
+- 选择 页面中所有该标签名的标签 
+2. id选择器
+- html页面中的所有标签都可以添加id属性, 每个标签的id属性需要是唯一的
+- 格式: #id{样式代码}
+- 选择 页面中id值为xxx的某一个标签
+3. class选择器(类选择器)
+- 格式: .class{样式代码}
+- 选择页面中所有class值为xxx的多个标签
+4. 分组选择器
+- 将多个选择器合并成一个选择器
+- 格式: #id,.class,h1{样式代码}
+5. 属性选择器
+- 格式: 标签名[属性名='值']{样式代码}
+- 通过元素的属性去做选择条件
+6. 子孙后代选择器
+- 格式: div p{样式代码}
+- 匹配div里面的所有p标签(子元素和所有后代元素)
+7. 子元素选择器 
+- 格式: div>p{样式代码}
+- 匹配div里面子元素里面的p标签(只包含子元素)
+8. 伪类选择器
+- 选择元素的状态: 未访问状态  访问过状态  悬停状态  点击状态
+- 格式: a:link未访问/visited访问过/hover悬停/active点击{样式代码}
+9. 任意元素选择器
+- 匹配页面中所有的元素
+- 格式: *{样式代码}
+
+
+1. 标签名   div{}
+2. id选择器    #id{}
+3. class      .class{}
+4. 分组      div,#id,.class{}
+5. 属性选择器   标签名[属性名='值']{}
+6. 子孙后代    div div p{}
+7. 子元素      div>div>p{}
+8. 伪类       a:link/visited/hover/active{}
+9. 任意元素     *{}
+
+####课堂练习: 代码参见demo06.html
+1. 修改p2的颜色为绿色
+2. 修改p3和h3-3和八戒的颜色为黄色
+3. 修改所有li的背景色为粉色pink
+4. 修改重置按钮背景色为紫色
+5. 修改p4字体颜色为蓝色
+6. 修改p4和p5背景色为绿色
+7. 修改美女悬停颜色为红色
+8. 修改所有元素边框为1个像素
+实线绿色边框
+###常见的样式
+####颜色赋值方式
+- 三原色: 红 绿 蓝  rgb   red green blue    每个颜色取值范围0-255
+
+1. 颜色单词赋值   red/blue/pink/green等
+2. 6位16进制赋值   #ff0000  
+3. 3位16进制赋值   #f00   等效 #ff0000
+4. 3位10进制赋值   rgb(255,0,0)
+5. 4位10进制赋值   rgba(255,0,0,0-1)   a=alpha透明值 值越小越透明
+####背景图片
+- background-image: url("路径");
+- background-size: 宽度  高度;  要有单位px
+- background-repeat: no-repeat; 禁止重复
+- background-position: 横向百分比  纵向百分比;
+
+
+###课程回顾:
+1. 特殊字符 转译
+- 空格:  &nbsp;
+- 小于号:  &lt;
+- 大于号:  &gt;
+2. 分区标签: div
+- h5中新增: header footer article section nav
+3. CSS 层叠样式表     用于美化页面
+4. 引入方式:
+- 内联: 在标签里面添加 style属性  在属性值里面添加css样式代码,弊端: 不能复用  
+- 内部: 在head标签里面添加style标签 ,标签体内写样式代码 ,可以复用但只能当前页面复用
+- 外部: 在单独的css文件中写样式代码 在html页面中通过link标签引入,可以多页面复用
+- 优先级: 内联优先级最高   内部和外部一样 后执行覆盖先执行的
+5. 选择器
+- div{}
+- #id{}
+- .class{}
+- div,#id,.class{}
+- input[type='text']{}
+- div p{}子孙后代
+- div>p{}子元素
+- a:link/visited/hover/active{}
+- *{}
+6. 颜色赋值
+- 颜色单词 red
+- 6位16进制  #ff0000
+- 3位16进制  #f00
+- 3位10进制  rgb(255,0,0)
+- 4位10进制  rgba(255,0,0,0-1)  值越小越透明
+8. 背景图片
+- background-image/size/repeat/position
