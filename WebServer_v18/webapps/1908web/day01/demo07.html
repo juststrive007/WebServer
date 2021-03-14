@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form action="http://www.baidu.com"><!--默认method是get-->
+    <!-- name 是所有控件必须写的属性，不写则不提交数据      -->
+        用户名:<input type="text" name ="username"
+                   placeholder="请输入用户名"
+                   value = "aaa"
+                   readonly="readonly"
+        > <br>
+        密    码: <input type="password" name="password"><br>
+        性 别:<input type="radio" name="gender" value="m" checked="checked"
+        id="nan"><label for="nan">男</label>
+        <input type="radio" name="gender" value="w" id="nv">
+        <label for="nv">女</label><br>
+        <!-- 通过value区分男女，通过name控制控件统一，变为单选。       -->
+
+        兴趣:<input type="checkbox" name="hobby" value="cy" checked="checked">抽烟
+        <input type="checkbox" name="hobby" value="hj">喝酒
+        <input type="checkbox" name="hobby" value="tt">烫头<br>
+         生日:<input type="date" name="birthday" ><br>
+         靓照:<input type="file" name="pic"><br>
+         所在城市:<select name="location">
+            <option>请选择</option>
+            <option value="bj" selected="selected">北京</option>
+            <option value="sh">上海</option>
+            <option value="sz">深圳</option>
+        </select>
+        <input type="reset" > <!--重置页面上输入的内容-->
+        <input type="submit" value="注册">
+    </form>
+</body>
+</html>

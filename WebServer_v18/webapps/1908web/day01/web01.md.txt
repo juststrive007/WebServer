@@ -1,0 +1,128 @@
+###
+###
+1. Web前端:学习如何开发页面
+2. 数据库:学习如何通过数据库软件对数据进行增删改查操作 
+3. Servlet:学习如何获取请求和如何发出响应 
+###Web前端课程介绍
+1. HTML: 学习如何搭建页面结构和内容  (盖房子,毛坯房)
+2. CSS: 负责美化页面   (装修)
+3. JavaScript: 学习如何给页面添加动态效果 (给房子添加点儿机关)
+4. jQuery: 对原生javaScript进行封装,是一个JS框架,简化JS操作
+5. BootStrap: 前端框架,使前端页面开发变得更便捷更高效
+
+###HTML
+- XML: 可扩展标记语言 
+- HTML:超文本标记语言 ,学习HTML中有哪些标签,标签有哪些属性,标签和标签之间的嵌套关系.
+###HTML模板介绍
+
+
+		<!DOCTYPE html>文档声明,告诉浏览器使用html5版本的标准解析页面
+		<html> 根标签,除了文档声明 所有标签都在其内部
+			<head>头标签:给浏览器看的内容写在头标签里面
+				<meta charset="UTF-8"> 告诉浏览器字符集是什么
+				<title>Insert title here</title>页面标题
+			</head>
+			<body>体标签:给用户看的内容写在体标签
+				
+			</body>
+		</html>
+
+###常见文本标签
+1. 内容标题h1-h6
+	字体加粗, 自带上下间距,独占一行
+- align="left/right/center" 水平对齐方式
+2. 段落标签 p
+	自带上下间距,独占一行 
+3. 换行<br>
+###列表标签
+1. 无序列表:  ul:type图标样式   li
+	
+		<ul type="square"><!-- unordered list无序列表 -->
+			<li>刘备</li><!-- list item列表项 -->
+			<li>孙尚香</li>
+			<li>貂蝉</li>
+			<li>吕布</li>
+			<li>刘禅</li>
+		</ul>
+
+2. 有序列表: ol:type序号样式 start起始值 reversed降序    li
+
+		<ol type="1" start="10"
+			 reversed="reversed">
+			<li>打开冰箱门</li>
+			<li>把大象装进去</li>
+			<li>关上冰箱门</li>
+			<li>关上冰箱门</li>
+			<li>关上冰箱门</li>
+			<li>关上冰箱门</li>
+		</ol>
+
+3. 定义列表: dl定义列表  dt定义标题  dd定义描述
+
+		<dl><!-- 定义列表 -->
+			<dt>凉菜</dt><!-- 定义标题 -->
+			<dd>拍黄瓜</dd><!-- 定义描述 -->
+			<dd>芥末鸭掌</dd>
+			<dd>花毛一体</dd>
+			<dt>炒菜</dt>
+			<dd>葱爆羊肉</dd>
+			<dd>宫保鸡丁</dd>
+			<dd>木须肉</dd>
+		</dl>
+
+4. 列表嵌套: 有序列表和无序列表可以任意无限嵌套 
+
+		<ul>
+			<li>凉菜
+				<ol>
+					<li>拍黄瓜</li>
+					<li>老醋花生</li>
+				</ol>
+			</li>
+			<li>炒菜
+				<ol>
+					<li>宫保鸡丁</li>
+					<li>番茄炒蛋
+						<ul>
+							<li>甜口味</li>
+							<li>咸口味</li>
+						</ul>
+					</li>
+				</ol>
+			</li>
+		</ul>
+###图片标签img
+- src: 路径
+	1. 相对路径:访问站内资源时使用
+		- 图片和页面在同一目录:  直接写图片名
+		- 图片在页面的上级目录:  ../图片名
+		- 图片在页面的下级目录:  文件夹名/图片名
+	2. 绝对路径:访问站外资源时使用,又称为图片盗链,好处是节省本站资源,坏处:有找不到图片的风险  
+- alt: 当图片不能正常显示时显示的文本
+- title: 鼠标悬停时显示的文本
+- width/height:  1. 像素   2. 百分比   如果只设置宽度 高度会等比例缩放
+###超链接a
+- 如果不写href 则是纯文本
+- href:路径, 可以访问站内和站外的资源, 可以是页面资源也可以是文件资源,如果是文件资源,浏览器支持浏览的直接浏览器,不支持的则下载.
+- 图片超链接 
+###表格标签table
+- 标签: table tr行  td列   th表头   caption表格标题
+- 属性: table(border边框粗细 cellspacing两条线变一条线) td(跨行rowspan 跨列colspan)
+###表单form  
+- 作用: 获取用户输入的各种信息 提交到服务器
+- 学习表单主要学习的就是表单中有哪些控件: 文本框 密码框 单选 多选 下拉选等
+- 各种控件:
+1. 文本框 <input type="text"> 属性: name  value默认值 placeholder占位文本 readonly只读
+2. 密码框 <input type="password"> 属性:和文本框通用 
+3. 单选框 <input type="radio">  属性: value   默认选中checked
+4. 多选框 <input type="checkbox"> 属性: 和单选一样 
+5. 日期选择器 <input type="date"> 
+6. 文件选择器 <input type="file">
+7. 下拉选  <select name><option value 默认选中selected>
+8. 重置按钮 <input type="reset">
+9. 提交按钮 <input type="submit">
+
+
+
+
+
